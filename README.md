@@ -22,7 +22,7 @@ A responsive task management app that allows users to add, view and delete tasks
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/daniel-liemng/task_manager_react/blob/main/screenshot/task-manager-photo.png)
 
 ## Installation
 
