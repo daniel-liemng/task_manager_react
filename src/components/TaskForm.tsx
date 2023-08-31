@@ -2,7 +2,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import categories from '../categories';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as dayjs from 'dayjs';
+
+import { Task } from '../interface/Task';
 
 const formSchema = z.object({
   title: z
@@ -16,7 +17,11 @@ const formSchema = z.object({
 
 type TaskFormData = z.infer<typeof formSchema>;
 
-const TaskForm = () => {
+interface TaskFormProps {
+  onAddTask: (task: Omit<Task, 'id'>, reset: () => void) => void;
+}
+
+const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
   const {
     register,
     handleSubmit,
@@ -28,6 +33,14 @@ const TaskForm = () => {
 
   const onSubmit: SubmitHandler<TaskFormData> = (data) => {
     console.log(data);
+    onAddTask(
+      {
+        title: data.title,
+        dueDate: data.dueDate,
+        category: data.category,
+      },
+      reset
+    );
   };
 
   return (
@@ -61,7 +74,7 @@ const TaskForm = () => {
           </label>
           <input
             id='dueDate'
-            type='date'
+            type='datetime-local'
             {...register('dueDate')}
             className='p-2 rounded-lg w-full'
           />
