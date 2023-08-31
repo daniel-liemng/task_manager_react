@@ -41,7 +41,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete }) => {
           ) : (
             <tr>
               <td></td>
-              <td className='text-center'>No tasks yet</td>
+              <td className='text-center'>No tasks</td>
               <td></td>
               <td></td>
             </tr>

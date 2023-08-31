@@ -90,7 +90,11 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
           >
             Category
           </label>
-          <select {...register('category')} className='p-2 rounded-lg w-full'>
+          <select
+            id='category'
+            {...register('category')}
+            className='p-2 rounded-lg w-full'
+          >
             <option value=''>Please select one</option>
             {categories.map((category, index) => (
               <option value={category} key={index}>
@@ -107,7 +111,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
           <button
             type='button'
             onClick={() => reset()}
-            className='w-full py-2 text-white font-semibold bg-orange-500 rounded-lg'
+            className='w-full py-2 text-white font-semibold bg-gray-500 rounded-lg'
           >
             Reset
           </button>

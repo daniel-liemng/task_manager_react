@@ -12,10 +12,15 @@ import TaskFilter from './components/TaskFilter';
 //   { id: 4, title: 'Task 4', dueDate: '09-08-2023', category: 'Work' },
 // ];
 
-const App = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+const getTaskFromLocalStorage = () => {
+  const localTasks = localStorage.getItem('tasks');
+  return localTasks ? JSON.parse(localTasks) : [];
+};
 
-  const [searchTerm, setSearchTerm] = useState<string>('');
+const App = () => {
+  const [tasks, setTasks] = useState<Task[]>(getTaskFromLocalStorage());
+
+  const [searchTerm, setSearchTerm] = useState<string>('All');
   const [filteredTasks, setFilteredTasks] = useState<Task[]>(tasks);
 
   useEffect(() => {
@@ -36,8 +41,10 @@ const App = () => {
       dueDate: task.dueDate,
       category: task.category,
     };
+    const newTasks = [...tasks, newTask];
 
-    setTasks([...tasks, newTask]);
+    setTasks(newTasks);
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
     reset();
   };
 
@@ -50,18 +57,20 @@ const App = () => {
     setSearchTerm(category);
   };
 
-  console.log('aaa', tasks);
-  console.log('bbb', searchTerm);
-
   return (
     <div className='w-full h-screen p-3'>
-      <div className='flex gap-7 flex-wrap p-5 w-full h-full border rounded-lg'>
-        <div className='w-1/3'>
-          <TaskForm onAddTask={handleAddTask} />
-        </div>
-        <div className='flex-1'>
-          <TaskFilter onSearchByCategory={handleSearchByCategory} />
-          <TaskList tasks={filteredTasks} onDelete={handleDeleteTask} />
+      <div className=' p-5 w-full h-full border rounded-lg'>
+        <h2 className='text-3xl text-center text-orange-500 font-semibold mb-5 uppercase'>
+          Task Manager
+        </h2>
+        <div className='flex gap-7 flex-wrap'>
+          <div className='w-[350px]'>
+            <TaskForm onAddTask={handleAddTask} />
+          </div>
+          <div className='flex-1'>
+            <TaskFilter onSearchByCategory={handleSearchByCategory} />
+            <TaskList tasks={filteredTasks} onDelete={handleDeleteTask} />
+          </div>
         </div>
       </div>
     </div>
