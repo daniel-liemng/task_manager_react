@@ -32,7 +32,6 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAddTask }) => {
   });
 
   const onSubmit: SubmitHandler<TaskFormData> = (data) => {
-    console.log(data);
     onAddTask(
       {
         title: data.title,

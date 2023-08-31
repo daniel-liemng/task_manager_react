@@ -23,14 +23,25 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState<string>('All');
   const [filteredTasks, setFilteredTasks] = useState<Task[]>(tasks);
 
+  const connvertedTasks = (taskArr: any[]): Task[] => {
+    return taskArr.map((task: any) => ({
+      id: task.id,
+      title: task.title,
+      dueDate: new Date(task.dueDate),
+      category: task.category,
+    }));
+  };
+
   useEffect(() => {
     if (searchTerm === 'All') {
-      setFilteredTasks(tasks);
+      // setFilteredTasks(tasks);
+      setFilteredTasks(connvertedTasks(tasks));
     } else {
       const newTasks = tasks.filter((task) =>
         task.category.includes(searchTerm)
       );
-      setFilteredTasks(newTasks);
+      // setFilteredTasks(newTasks);
+      setFilteredTasks(connvertedTasks(newTasks));
     }
   }, [tasks, searchTerm]);
 
@@ -56,6 +67,8 @@ const App = () => {
   const handleSearchByCategory = (category: string) => {
     setSearchTerm(category);
   };
+
+  console.log('88899', filteredTasks);
 
   return (
     <div className='w-full h-screen p-3'>
