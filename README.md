@@ -31,10 +31,10 @@ From your command line:
 
 ```bash
   # Clone this repository
-  $ git...
+  $ git clone https://github.com/daniel-liemng/task_manager_react.git
 
   # Go into the repository
-  $ cd ...
+  $ cd task_manager_react
 
   # Install dependencies
   $ npm install
