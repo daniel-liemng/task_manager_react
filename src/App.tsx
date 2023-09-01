@@ -68,8 +68,6 @@ const App = () => {
     setSearchTerm(category);
   };
 
-  console.log('88899', filteredTasks);
-
   return (
     <div className='w-full h-screen p-3'>
       <div className=' p-5 w-full h-full border rounded-lg'>
