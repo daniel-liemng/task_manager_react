@@ -1,4 +1,5 @@
-import * as dayjs from 'dayjs';
+// import * as dayjs from 'dayjs';
+import moment from 'moment';
 import { FaTrash } from 'react-icons/fa';
 
 import { Task } from '../interface/Task';
@@ -25,7 +26,8 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onDelete }) => {
             tasks.map((task: Task) => (
               <tr key={task.id}>
                 <td>{task.title}</td>
-                <td>{dayjs(task.dueDate).format('DD-MM-YYYY')}</td>
+                {/* <td>{dayjs(task.dueDate).format('DD-MM-YYYY')}</td> */}
+                <td>{moment(task.dueDate, 'MM-DD-YYYY').format()}</td>
                 <td>{task.category}</td>
                 <td>
                   <button
